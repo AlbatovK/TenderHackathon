@@ -1,6 +1,6 @@
 package com.albatros.springsecurity.data.model.dto
 
-data class TenderInfoDtoItem(
+data class TenderInfoDto(
     val ApiContractInfo: String,
     val ApiIzmInfo: String,
     val ApiPredInfo: String,

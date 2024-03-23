@@ -1,21 +1,23 @@
 package com.albatros.springsecurity.data.model.dto
 
-data class TenderDtoItem(
-    val ApiTenderInfo: String,
-    val Category: String,
-    val Customer: String,
-    val Date: String,
-    val EndTime: String,
-    val Etp: String,
-    val Fz: String,
-    val ID: String,
-    val Price: String,
-    val Region: String,
-    val TenderLink: String,
-    val TenderLinkInner: String,
-    val TenderName: String,
-    val TenderNumOuter: String,
-    val Total: String,
-    val User_id: String,
-    val searchFragmentXML: SearchFragmentXML
-)
+import java.io.Serializable
+
+class TenderDto(
+    var ApiTenderInfo: String?,
+    var Category: String?,
+    var Customer: String?,
+    var Date: String?,
+    var EndTime: String?,
+    var Etp: String?,
+    var Fz: String?,
+    var ID: String?,
+    var Price: String?,
+    var Region: String?,
+    var TenderLink: String?,
+    var TenderLinkInner: String?,
+    var TenderName: String?,
+    var TenderNumOuter: String?,
+    var Total: String?,
+    var User_id: String?,
+    var searchFragmentXML: SearchFragmentXML?
+): Serializable
