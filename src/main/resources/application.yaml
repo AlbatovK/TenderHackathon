@@ -89,3 +89,5 @@ tender-config:
 
 vaadin:
   exclude-urls: /swagger-ui/*, /api/*, /swagger-ui/index.html, /api-docs, v3/api-docs
+  load-on-startup: true
+  allowed-packages: com.albatros.springsecurity.presentation.route

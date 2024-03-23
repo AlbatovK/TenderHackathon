@@ -18,7 +18,6 @@ class TenderController(
     @GetMapping("tenders/{id}")
     fun getTendersByProviderId(@PathVariable id: Int) = tenderService.getTendersByProviders(id)
 
-    @GetMapping("tender_info/{id}")
+    @GetMapping("tenders/{id}/info")
     fun getTenderInfoById(@PathVariable id: Int) = tenderService.getTenderInfoById(id)
-
 }

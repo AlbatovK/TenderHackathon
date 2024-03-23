@@ -1,17 +1,18 @@
 package com.albatros.springsecurity.presentation.route
 
-import com.albatros.springsecurity.data.model.dto.TenderProviderDto
-import com.albatros.springsecurity.data.service.TenderApiService
+import com.albatros.springsecurity.data.model.database.TenderProvider
+import com.albatros.springsecurity.data.repository.TenderProviderRepository
 import com.vaadin.flow.component.Text
 import com.vaadin.flow.component.button.Button
 import com.vaadin.flow.component.grid.Grid
 import com.vaadin.flow.component.notification.Notification
 import com.vaadin.flow.component.orderedlayout.VerticalLayout
 import com.vaadin.flow.router.Route
+import com.vaadin.flow.spring.data.VaadinSpringDataHelpers
 
 @Route("")
 class MainRoute(
-    tenderService: TenderApiService
+    repository: TenderProviderRepository
 ) : VerticalLayout() {
 
     init {
@@ -22,13 +23,15 @@ class MainRoute(
             ) {
                 Notification.show("CDs nuts").open()
             },
-            Grid<TenderProviderDto>().apply {
-                addColumn(TenderProviderDto::id).setHeader("Id")
-                addColumn(TenderProviderDto::etpName).setHeader("Name")
+            Grid<TenderProvider>().apply {
+                addColumn(TenderProvider::tenderId).setHeader("Id")
+                addColumn(TenderProvider::etpName).setHeader("Name")
 
-                setItems(
-                    tenderService.getAllTenderProviders()
-                )
+                setItems {
+                    repository.findAll(
+                        VaadinSpringDataHelpers.toSpringPageRequest(it)
+                    ).stream()
+                }
             }
         )
     }

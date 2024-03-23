@@ -20,4 +20,4 @@ class TenderDto(
     var Total: String?,
     var User_id: String?,
     var searchFragmentXML: SearchFragmentXML?
-): Serializable
+) : Serializable
