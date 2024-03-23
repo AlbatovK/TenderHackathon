@@ -1,4 +1,4 @@
-package com.albatros.springsecurity.domain.model.response
+package com.albatros.springsecurity.data.model.response
 
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

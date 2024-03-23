@@ -1,4 +1,4 @@
-package com.albatros.springsecurity.domain.model.database
+package com.albatros.springsecurity.data.model.database
 
 import jakarta.persistence.Column
 import jakarta.persistence.GeneratedValue

@@ -9,6 +9,7 @@ services:
     depends_on:
       - db
       - redis
+      - search
     environment:
       - 'SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/database'
       - 'SPRING_DATASOURCE_USERNAME=user'

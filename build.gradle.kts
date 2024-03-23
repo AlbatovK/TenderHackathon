@@ -15,6 +15,7 @@ plugins {
     kotlin("plugin.noarg") version "1.9.10"
     kotlin("plugin.allopen") version "1.9.10"
     id("com.google.cloud.tools.jib") version "3.3.1"
+    id("com.vaadin") version "24.3.7"
 }
 
 allOpen {
@@ -63,17 +64,22 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-elasticsearch")
 
     // Vaadin
-    //implementation("com.vaadin:vaadin-spring-boot-starter")
+    implementation("com.vaadin:vaadin-spring-boot-starter")
+
+    // Kotlin
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     // Lombok
-    compileOnly("org.projectlombok:lombok")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
     annotationProcessor("org.projectlombok:lombok")
+    compileOnly("org.projectlombok:lombok")
 
     // Persistence
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
     runtimeOnly("org.postgresql:postgresql")
+
+    // WebClient
+    implementation("org.springframework.boot:spring-boot-starter-webflux")
 
     // Swagger-UI + OpenApi
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
@@ -95,7 +101,7 @@ dependencies {
 
 dependencyManagement {
     imports {
-        //   mavenBom("com.vaadin:vaadin-bom:24.3.7")
+        mavenBom("com.vaadin:vaadin-bom:24.3.7")
         mavenBom("org.springframework.ai:spring-ai-bom:0.8.1")
     }
 }

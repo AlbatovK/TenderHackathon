@@ -11,7 +11,6 @@ import java.util.Collections
 
 @Configuration
 class CacheManagerConfig {
-
     companion object {
         val timeToLiveDuration: Duration = Duration.ofSeconds(40_000)
     }

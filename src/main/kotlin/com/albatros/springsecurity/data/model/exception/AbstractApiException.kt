@@ -1,6 +1,6 @@
-package com.albatros.springsecurity.domain.model.exception
+package com.albatros.springsecurity.data.model.exception
 
-import com.albatros.springsecurity.domain.model.response.ApiResponse
+import com.albatros.springsecurity.data.model.response.ApiResponse
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import org.springframework.http.HttpStatus
 

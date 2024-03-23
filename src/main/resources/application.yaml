@@ -3,7 +3,6 @@ server:
 
 spring:
 
-
   application:
     name: spring-security
 
@@ -75,13 +74,18 @@ api-info:
   contact-email: ${INFO_EMAIL:albatovkonstantin@yandex.ru}
   contact-url: ${INFO_CONTACT:https://idk.com}
   contact-name: ${INFO_NAME:Albatov Konstantin}
-  description: ${INFO_DESCR:Spring Security App On Steroids}
-  external-docs-description: ${INFO_EXT_DESCR:External docs :)}
+  description: ${INFO_DESCR:Spring boot app for Tender Hackathon}
+  external-docs-description: ${INFO_EXT_DESCR:Some docs that are not written yet}
   license-url: ${INFO_LICENSE_URL:https://idk.com}
   external-docs-url: ${INFO_EXT_URL:https://idk.com}
   license-name: ${INFO_LICENSE_NAME:License Name}
-  title: ${INFO_TITLE:Spring Security}
+  title: ${INFO_TITLE:Tender Hackathon}
   version: ${INFO_VERSION:v0.0.1}
 
 tender-config:
   api-key: ${TENDER_API_KEY:a1PpB1yRL59q42A2}
+  api-url: ${TENDER_API_URL:https://www.tenderguru.ru/api2.3/}
+  timeout-ms: 10000
+
+vaadin:
+  exclude-urls: /swagger-ui/*, /api/*, /swagger-ui/index.html, /api-docs, v3/api-docs

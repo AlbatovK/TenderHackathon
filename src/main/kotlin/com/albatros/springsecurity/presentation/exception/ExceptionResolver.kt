@@ -1,8 +1,8 @@
-package com.albatros.springsecurity.controller
+package com.albatros.springsecurity.presentation.exception
 
-import com.albatros.springsecurity.domain.model.exception.AbstractApiException
-import com.albatros.springsecurity.domain.model.exception.ValidationErrorException
-import com.albatros.springsecurity.domain.model.response.ApiResponse
+import com.albatros.springsecurity.data.model.exception.AbstractApiException
+import com.albatros.springsecurity.data.model.exception.ValidationErrorException
+import com.albatros.springsecurity.data.model.response.ApiResponse
 import jakarta.validation.ConstraintViolationException
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.MethodArgumentNotValidException

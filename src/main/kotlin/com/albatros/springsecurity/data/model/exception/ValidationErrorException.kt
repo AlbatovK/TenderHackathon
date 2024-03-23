@@ -1,4 +1,4 @@
-package com.albatros.springsecurity.domain.model.exception
+package com.albatros.springsecurity.data.model.exception
 
 import org.springframework.http.HttpStatus
 
