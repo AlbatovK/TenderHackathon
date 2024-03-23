@@ -1,0 +1,87 @@
+server:
+  port: ${SERVICE_PORT:8080}
+
+spring:
+
+
+  application:
+    name: spring-security
+
+  main:
+    banner-mode: off
+
+  elasticsearch:
+    uris: ${ES_URI:http://localhost:9200}
+
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+
+  cache:
+    type: redis
+    redis:
+      cache-null-values: false
+      time-to-live: ${CACHE_TTL:40000}
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/database}
+    username: ${DB_USER:user}
+    password: ${DB_PASSWORD:password}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+    database: postgresql
+
+  liquibase:
+    enabled: false
+    drop-first: false
+    default-schema: public
+
+  security:
+    user:
+      name: ${SEC_USER_NAME:user}
+      password: ${SEC_USER_PASSWORD:password}
+
+  ai:
+    retry:
+      max-attempts: 1
+
+    openai:
+      api-key: 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
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  show-actuator: true
+  swagger-ui:
+    show-extensions: true
+    operations-sorter: method
+
+logging:
+  level:
+    org.hibernate.type.descriptor.sql: trace
+
+api-info:
+  contact-email: ${INFO_EMAIL:albatovkonstantin@yandex.ru}
+  contact-url: ${INFO_CONTACT:https://idk.com}
+  contact-name: ${INFO_NAME:Albatov Konstantin}
+  description: ${INFO_DESCR:Spring Security App On Steroids}
+  external-docs-description: ${INFO_EXT_DESCR:External docs :)}
+  license-url: ${INFO_LICENSE_URL:https://idk.com}
+  external-docs-url: ${INFO_EXT_URL:https://idk.com}
+  license-name: ${INFO_LICENSE_NAME:License Name}
+  title: ${INFO_TITLE:Spring Security}
+  version: ${INFO_VERSION:v0.0.1}
+
+tender-config:
+  api-key: ${TENDER_API_KEY:a1PpB1yRL59q42A2}
