@@ -57,7 +57,7 @@ spring:
       max-attempts: 1
 
     openai:
-      api-key: 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
+      api-key: ${OPEN_API_KEY:secret-secret-key}
 
 springdoc:
   api-docs:
