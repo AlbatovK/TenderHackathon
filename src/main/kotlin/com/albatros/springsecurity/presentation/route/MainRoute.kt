@@ -1,7 +1,7 @@
 package com.albatros.springsecurity.presentation.route
 
 import com.albatros.springsecurity.data.model.dto.TenderProviderDto
-import com.albatros.springsecurity.data.service.TenderService
+import com.albatros.springsecurity.data.service.TenderApiService
 import com.vaadin.flow.component.Text
 import com.vaadin.flow.component.button.Button
 import com.vaadin.flow.component.grid.Grid
@@ -11,7 +11,7 @@ import com.vaadin.flow.router.Route
 
 @Route("")
 class MainRoute(
-    tenderService: TenderService
+    tenderService: TenderApiService
 ) : VerticalLayout() {
 
     init {
