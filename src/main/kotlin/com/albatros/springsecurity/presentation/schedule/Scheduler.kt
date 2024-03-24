@@ -22,24 +22,22 @@ class Scheduler(
     private val logger: Logger = LoggerFactory.getLogger(Scheduler::class.java)
 
     @Async
-    @Scheduled(fixedDelay = 100_000)
-    fun scheduleTenderProvidersData() {
-        logger.debug("Collecting providers data from external sources.")
+    @Scheduled(fixedDelay = 1_000_000)
+    fun scheduleTendersData() {
+
+        logger.info("Collecting providers data from external sources.")
         apiService.getAllTenderProviders()?.let {
             tenderProviderRepository.saveAll(
                 it.map(TenderProviderDto::toDomainObject)
             )
         }
 
-        logger.debug("Collection stopped.")
-    }
+        logger.info("Collection stopped.")
 
-    @Async
-    @Scheduled(fixedDelay = 100_000)
-    fun scheduleTendersData() {
-        logger.debug("Collecting tenders data from external sources.")
+        logger.info("Collecting tenders data from external sources.")
 
         tenderProviderRepository.findAll().forEach { provider ->
+            logger.info("Collecting for provider ${provider.etpName}.")
             apiService.getTendersByProviders(provider.tenderId)?.let {
                 tenderRepository.saveAll(
                     it.map(TenderDto::toDomainObject)
@@ -47,6 +45,6 @@ class Scheduler(
             }
         }
 
-        logger.debug("Collection stopped.")
+        logger.info("Collection stopped.")
     }
 }

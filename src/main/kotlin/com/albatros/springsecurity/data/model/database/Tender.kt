@@ -39,6 +39,8 @@ class Tender(
     var tenderNumOuter: String?,
     @Field(type = FieldType.Text, name = "user_id")
     var userId: String?,
+    @Field(type = FieldType.Text, name = "meta_data")
+    var metaData: String?
 )
 
 fun TenderDto.toDomainObject() =
@@ -57,5 +59,6 @@ fun TenderDto.toDomainObject() =
         tenderInnerLink = this.TenderLinkInner,
         tenderName = this.TenderName,
         tenderNumOuter = this.TenderNumOuter,
-        userId = this.User_id
+        userId = this.User_id,
+        metaData = this.searchFragmentXML?.fragment?.joinToString() ?: ""
     )
