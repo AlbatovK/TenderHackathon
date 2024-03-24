@@ -5,7 +5,6 @@ import org.springframework.data.annotation.Id
 import org.springframework.data.elasticsearch.annotations.Document
 import org.springframework.data.elasticsearch.annotations.Field
 import org.springframework.data.elasticsearch.annotations.FieldType
-import org.springframework.validation.annotation.Validated
 
 @Document(indexName = "tenders", createIndex = true)
 class Tender(

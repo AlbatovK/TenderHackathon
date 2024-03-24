@@ -2,9 +2,6 @@ package com.albatros.springsecurity.data.model.database
 
 import com.albatros.springsecurity.data.model.dto.TenderProviderDto
 import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
 import org.springframework.validation.annotation.Validated
 
 @Entity
