@@ -24,26 +24,38 @@ class TestRoute(repository: TenderSearchRepository) : VerticalLayout() {
     init {
         val includeTextField = TextField()
         val excludeTextField = TextField()
-        includeTextField.placeholder = "ключевые слова"
-        excludeTextField.placeholder = "нежелательные слова"
+        includeTextField.placeholder = "Ключевые слова"
+        excludeTextField.placeholder = "Нежелательные слова"
 
         val sheet: Grid<Tender> = Grid<Tender>().apply {
-            addColumn(Tender::apiTenderInfo).setHeader("apiTenderInfo")
-            addColumn(Tender::category).setHeader("category")
-            addColumn(Tender::customer).setHeader("customer")
-            addColumn(Tender::date).setHeader("date")
-            addColumn(Tender::endTime).setHeader("endTime")
-            addColumn(Tender::etp).setHeader("etp")
-            addColumn(Tender::fz).setHeader("fz")
-            addColumn(Tender::tenderId).setHeader("tenderId")
-            addColumn(Tender::price).setHeader("price")
-            addColumn(Tender::region).setHeader("region")
-            addColumn(Tender::tenderLink).setHeader("tenderLink")
-            addColumn(Tender::tenderInnerLink).setHeader("tenderInnerLink")
-            addColumn(Tender::tenderName).setHeader("tenderName")
-            addColumn(Tender::tenderNumOuter).setHeader("tenderNumOuter")
-            addColumn(Tender::userId).setHeader("userId")
-            addColumn(Tender::metaData).setHeader("metaData")
+            addColumn(Tender::category)
+                .setHeader("Категория")
+                .setSortable(true)
+            addColumn(Tender::region)
+                .setHeader("Регион")
+                .setSortable(true)
+            addColumn(Tender::customer)
+                .setHeader("Покупатель")
+                .setSortable(true)
+            addColumn(Tender::tenderName)
+                .setHeader("Тендер")
+                .setSortable(true)
+            addColumn(Tender::date)
+                .setHeader("Дата начала")
+                .setAutoWidth(true)
+                .setFlexGrow(0)
+                .setSortable(true)
+            addColumn(Tender::endTime)
+                .setHeader("Дата конца")
+                .setAutoWidth(true)
+                .setFlexGrow(0)
+                .setSortable(true)
+            addColumn(Tender::price)
+                .setHeader("Цена")
+                .setAutoWidth(true)
+                .setFlexGrow(0)
+                .setSortable(true)
+
             height = "600px"
         }
 
