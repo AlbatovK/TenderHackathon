@@ -24,7 +24,7 @@ class MainRoute(
                 Notification.show("CDs nuts").open()
             },
             Grid<TenderProvider>().apply {
-                addColumn(TenderProvider::tenderId).setHeader("Id")
+                addColumn(TenderProvider::tenderId).setHeader("Tender Id")
                 addColumn(TenderProvider::etpName).setHeader("Name")
 
                 setItems {

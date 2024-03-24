@@ -10,12 +10,10 @@ import org.springframework.validation.annotation.Validated
 @Entity
 @Validated
 class TenderProvider(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     var tenderId: Int,
     var etpName: String,
     var etpLink: String
-)
+) : AbstractEntity()
 
 fun TenderProviderDto.toDomainObject() =
     TenderProvider(
