@@ -4,7 +4,7 @@ import com.albatros.springsecurity.data.model.database.toDomainObject
 import com.albatros.springsecurity.data.model.dto.TenderDto
 import com.albatros.springsecurity.data.model.dto.TenderProviderDto
 import com.albatros.springsecurity.data.repository.TenderProviderRepository
-import com.albatros.springsecurity.data.repository.TenderRepository
+import com.albatros.springsecurity.data.repository.TenderSearchRepository
 import com.albatros.springsecurity.data.service.TenderApiService
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -15,7 +15,7 @@ import org.springframework.scheduling.annotation.Scheduled
 @Configuration
 class Scheduler(
     private val tenderProviderRepository: TenderProviderRepository,
-    private val tenderRepository: TenderRepository,
+    private val tenderRepository: TenderSearchRepository,
     private val apiService: TenderApiService,
 ) {
 

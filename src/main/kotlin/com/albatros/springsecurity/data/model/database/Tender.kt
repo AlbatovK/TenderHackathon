@@ -10,9 +10,9 @@ import org.springframework.data.elasticsearch.annotations.FieldType
 class Tender(
     @Field(type = FieldType.Text, name = "api_tender_info")
     var apiTenderInfo: String?,
-    @Field(type = FieldType.Keyword, name = "category")
+    @Field(type = FieldType.Text, name = "category")
     var category: String?,
-    @Field(type = FieldType.Keyword, name = "customer")
+    @Field(type = FieldType.Text, name = "customer")
     var customer: String?,
     @Field(type = FieldType.Text, name = "date")
     var date: String?,
@@ -35,7 +35,7 @@ class Tender(
     var tenderInnerLink: String?,
     @Field(type = FieldType.Text, name = "tender_name")
     var tenderName: String?,
-    @Field(type = FieldType.Keyword, name = "tender_num_outer")
+    @Field(type = FieldType.Text, name = "tender_num_outer")
     var tenderNumOuter: String?,
     @Field(type = FieldType.Text, name = "user_id")
     var userId: String?,
@@ -60,5 +60,9 @@ fun TenderDto.toDomainObject() =
         tenderName = this.TenderName,
         tenderNumOuter = this.TenderNumOuter,
         userId = this.User_id,
-        metaData = this.searchFragmentXML?.fragment?.joinToString() ?: ""
+        metaData = (
+            this.ApiTenderInfo + this.Category + this.Customer + this.Etp + this.ID + this.Price +
+                this.Region + this.TenderName + this.User_id +
+                this.searchFragmentXML?.fragment?.joinToString()
+            )
     )
