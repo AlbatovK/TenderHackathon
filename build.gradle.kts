@@ -1,4 +1,5 @@
 import com.google.cloud.tools.jib.gradle.JibExtension
+import com.vaadin.gradle.vaadin
 import io.gitlab.arturbosch.detekt.Detekt
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
@@ -48,7 +49,16 @@ configurations {
 
 repositories {
     mavenCentral()
-    maven { url = uri("https://repo.spring.io/milestone") }
+    maven { setUrl("https://maven.vaadin.com/vaadin-prereleases") }
+    maven { setUrl("https://repo.spring.io/milestone") }
+    maven { setUrl("https://maven.vaadin.com/vaadin-addons") }
+}
+
+vaadin.productionMode = true
+
+vaadin {
+    forceProductionBuild = true
+    productionMode = true
 }
 
 dependencies {
@@ -63,7 +73,11 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-elasticsearch")
 
     // Vaadin
-    implementation("com.vaadin:vaadin-spring-boot-starter")
+    implementation("com.vaadin:vaadin-spring-boot-starter") {
+        if (vaadin.effective.productionMode.get()) {
+            exclude(module = "vaadin-dev")
+        }
+    }
 
     // Kotlin
     implementation("org.jetbrains.kotlin:kotlin-reflect")

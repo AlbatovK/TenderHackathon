@@ -2,7 +2,7 @@ FROM gradle:8-jdk17 as builder
 USER root
 WORKDIR /builder
 ADD . /builder
-RUN gradle build --stacktrace
+RUN gradle clean build -P"vaadin.productionMode" --stacktrace
 
 FROM openjdk:17-jdk-slim
 WORKDIR /app
