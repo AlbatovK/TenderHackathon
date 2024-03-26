@@ -54,11 +54,12 @@ repositories {
     maven { setUrl("https://maven.vaadin.com/vaadin-addons") }
 }
 
-vaadin.productionMode = true
+vaadin.productionMode = System.getenv("PROD_MODE")?.toBoolean() ?: false
+
 
 vaadin {
-    forceProductionBuild = true
-    productionMode = true
+    forceProductionBuild = System.getenv("PROD_MODE")?.toBoolean() ?: false
+    productionMode = System.getenv("PROD_MODE")?.toBoolean() ?: false
 }
 
 dependencies {
@@ -74,7 +75,7 @@ dependencies {
 
     // Vaadin
     implementation("com.vaadin:vaadin-spring-boot-starter") {
-        if (vaadin.effective.productionMode.get()) {
+        if (System.getenv("PROD_MODE")?.toBoolean() == true) {
             exclude(module = "vaadin-dev")
         }
     }
