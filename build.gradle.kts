@@ -56,6 +56,7 @@ repositories {
 
 vaadin.productionMode = System.getenv("PROD_MODE")?.toBoolean() ?: false
 
+
 vaadin {
     forceProductionBuild = System.getenv("PROD_MODE")?.toBoolean() ?: false
     productionMode = System.getenv("PROD_MODE")?.toBoolean() ?: false
@@ -74,7 +75,7 @@ dependencies {
 
     // Vaadin
     implementation("com.vaadin:vaadin-spring-boot-starter") {
-        if (vaadin.effective.productionMode.get()) {
+        if (System.getenv("PROD_MODE")?.toBoolean() == true) {
             exclude(module = "vaadin-dev")
         }
     }
