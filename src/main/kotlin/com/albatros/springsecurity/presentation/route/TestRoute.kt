@@ -2,23 +2,19 @@ package com.albatros.springsecurity.presentation.route
 
 import com.albatros.springsecurity.data.model.database.Tender
 import com.albatros.springsecurity.data.repository.TenderSearchRepository
-import com.vaadin.flow.component.ClickEvent
-import com.vaadin.flow.component.ComponentEventListener
 import com.vaadin.flow.component.button.Button
 import com.vaadin.flow.component.button.ButtonVariant
-import com.vaadin.flow.component.contextmenu.MenuItem
 import com.vaadin.flow.component.grid.Grid
+import com.vaadin.flow.component.grid.GridVariant
 import com.vaadin.flow.component.html.Div
 import com.vaadin.flow.component.icon.VaadinIcon
-import com.vaadin.flow.component.menubar.MenuBar
-import com.vaadin.flow.component.menubar.MenuBarVariant
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout
 import com.vaadin.flow.component.orderedlayout.VerticalLayout
+import com.vaadin.flow.component.select.Select
 import com.vaadin.flow.component.tabs.TabSheet
 import com.vaadin.flow.component.textfield.TextField
 import com.vaadin.flow.router.Route
 import com.vaadin.flow.spring.data.VaadinSpringDataHelpers
-import org.springframework.data.domain.Pageable
 
 @Route("test")
 class TestRoute(repository: TenderSearchRepository) : VerticalLayout() {
@@ -89,15 +85,20 @@ class TestRoute(repository: TenderSearchRepository) : VerticalLayout() {
 //            dialog
         )
     }
-
-    // нейминг отдыхает
     private fun getLockedSearch(repository: TenderSearchRepository): Div {
-        val menuBar = MenuBar()
-        val div = Div(getBaseTable())
-        val listener1: ComponentEventListener<ClickEvent<MenuItem>> =
-            ComponentEventListener<ClickEvent<MenuItem>> {
-                div.removeAll() // плохой код, потом переделать
 
+        val select: Select<String> = Select()
+        select.label = "Тип поиска"
+        select.setItems(
+            "По категории",
+            "По площадке",
+        )
+
+        val div = Div(getBaseTable())
+
+        select.addValueChangeListener {
+            if (select.value == "По категории") {
+                div.removeAll()
                 val sheet: Grid<Tender> = getBaseTable()
 
                 val categoryText = TextField()
@@ -120,7 +121,6 @@ class TestRoute(repository: TenderSearchRepository) : VerticalLayout() {
                 )
 
                 val hl = HorizontalLayout(
-                    menuBar,
                     categoryText,
                     button,
                 )
@@ -130,23 +130,21 @@ class TestRoute(repository: TenderSearchRepository) : VerticalLayout() {
                     sheet,
                 )
             }
-
-        val listener2: ComponentEventListener<ClickEvent<MenuItem>> =
-            ComponentEventListener<ClickEvent<MenuItem>> {
-                div.removeAll() // плохой код, потом переделать
+            if (select.value == "По площадке") {
+                div.removeAll()
 
                 val sheet: Grid<Tender> = getBaseTable()
 
-                val regionText = TextField()
+                val etpText = TextField()
 
-                regionText.placeholder = "Регион"
+                etpText.placeholder = "Площадка"
 
                 val button = Button("Найти", VaadinIcon.SEARCH.create()) {
-                    val region = regionText.value
+                    val etp = etpText.value
 
                     sheet.setItems {
-                        repository.findAllByRegionIgnoreCase(
-                            region,
+                        repository.findAllByEtpEqualsIgnoreCase(
+                            etp,
                             VaadinSpringDataHelpers.toSpringPageRequest(it)
                         ).stream()
                     }
@@ -158,8 +156,7 @@ class TestRoute(repository: TenderSearchRepository) : VerticalLayout() {
                 )
 
                 val hl = HorizontalLayout(
-                    menuBar,
-                    regionText,
+                    etpText,
                     button,
                 )
 
@@ -168,17 +165,10 @@ class TestRoute(repository: TenderSearchRepository) : VerticalLayout() {
                     sheet,
                 )
             }
-
-        menuBar.addItem("Поиск по категории", listener1)
-        menuBar.addItem("Поиск по регионам", listener2)
-
-        menuBar.addThemeVariants(
-            MenuBarVariant.LUMO_PRIMARY,
-            MenuBarVariant.LUMO_CONTRAST,
-        )
+        }
 
         val horizontalLayout = HorizontalLayout(
-            menuBar,
+            select,
         )
 
         return Div(
@@ -188,18 +178,21 @@ class TestRoute(repository: TenderSearchRepository) : VerticalLayout() {
     }
 
     private fun getBaseTable(): Grid<Tender> {
+
         val sheet: Grid<Tender> = Grid<Tender>().apply {
+            addColumn(Tender::tenderName)
+                .setHeader("Тендер")
+                .setSortable(true)
             addColumn(Tender::category)
                 .setHeader("Категория")
+                .setAutoWidth(true)
+                .setFlexGrow(0)
                 .setSortable(true)
-            addColumn(Tender::region)
-                .setHeader("Регион")
+            addColumn(Tender::etp)
+                .setHeader("Площадка")
                 .setSortable(true)
             addColumn(Tender::customer)
                 .setHeader("Покупатель")
-                .setSortable(true)
-            addColumn(Tender::tenderName)
-                .setHeader("Тендер")
                 .setSortable(true)
             addColumn(Tender::date)
                 .setHeader("Дата начала")
@@ -219,6 +212,10 @@ class TestRoute(repository: TenderSearchRepository) : VerticalLayout() {
 
             height = "600px"
         }
+
+        sheet.addThemeVariants(
+            GridVariant.LUMO_WRAP_CELL_CONTENT
+        )
 
         return sheet
     }
