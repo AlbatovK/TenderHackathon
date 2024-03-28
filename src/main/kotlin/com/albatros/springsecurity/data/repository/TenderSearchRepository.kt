@@ -80,7 +80,6 @@ interface TenderSearchRepository : ElasticsearchRepository<Tender, String> {
 
     fun findAllByRegionContainsIgnoreCase(region: String, pageable: Pageable): Page<Tender>
 
-
     fun findAllByRegion(region: String, pageable: Pageable): Page<Tender>
     fun findAllByRegionIgnoreCase(region: String, pageable: Pageable): Page<Tender>
 
