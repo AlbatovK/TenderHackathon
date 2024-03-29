@@ -25,4 +25,4 @@
 ![](https://github.com/AlbatovK/TenderHackathon/blob/dev/svg_diagram.drawio.svg?raw=true)
 
 ## Видео-демонстрация функционала
-Ссылка ня [яндекс-диск](https://disk.yandex.ru/i/RycUOM7ntfPiJQ)
+Ссылка ня [яндекс-диск](https://disk.yandex.ru/i/DtkCDSyQWG4WMw)
