@@ -73,10 +73,9 @@ interface TenderSearchRepository : ElasticsearchRepository<Tender, String> {
             }
         """
     )
+    fun fullTextSearchOr(keywords: String, exclude: String): List<Tender>
 
     fun findAllByCategoryIgnoreCase(category: String, pageable: Pageable): List<Tender>
-
-    fun fullTextSearchOr(keywords: String, exclude: String): List<Tender>
 
     fun findAllByTenderId(tenderId: String, pageable: Pageable): Page<Tender>
 

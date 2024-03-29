@@ -78,7 +78,6 @@ class TestRoute(repository: TenderSearchRepository) : VerticalLayout() {
             sheet,
         )
     }
-
     private fun getLockedSearch(repository: TenderSearchRepository): Div {
 
         val select: Select<String> = Select()
@@ -244,6 +243,7 @@ class TestRoute(repository: TenderSearchRepository) : VerticalLayout() {
     }
 
     private fun getBaseTable(): Grid<Tender> {
+
 
         val sheet: Grid<Tender> = Grid<Tender>().apply {
             addColumn(Tender::tenderName)
