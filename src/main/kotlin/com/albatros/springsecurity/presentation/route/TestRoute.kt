@@ -16,7 +16,7 @@ import com.vaadin.flow.component.textfield.TextField
 import com.vaadin.flow.router.Route
 import com.vaadin.flow.spring.data.VaadinSpringDataHelpers
 
-@Route("test")
+@Route("")
 class TestRoute(repository: TenderSearchRepository) : VerticalLayout() {
 
     init {
@@ -50,15 +50,9 @@ class TestRoute(repository: TenderSearchRepository) : VerticalLayout() {
 
         val sheet: Grid<Tender> = getBaseTable()
 
-//        val dialog = Dialog().apply {
-//            headerTitle = "Test"
-//        }
-
         val button = Button("Найти", VaadinIcon.SEARCH.create()) {
             val includeText = includeTextField.value
             val excludeText = excludeTextField.value
-
-//            dialog.open()
 
             sheet.setItems(
                 repository.fullTextSearchOr(
@@ -82,7 +76,6 @@ class TestRoute(repository: TenderSearchRepository) : VerticalLayout() {
         return Div(
             horizontalLayout,
             sheet,
-//            dialog
         )
     }
     private fun getLockedSearch(repository: TenderSearchRepository): Div {
@@ -92,6 +85,8 @@ class TestRoute(repository: TenderSearchRepository) : VerticalLayout() {
         select.setItems(
             "По категории",
             "По площадке",
+            "По тендеру",
+            "По покупателю",
         )
 
         val div = Div(getBaseTable())
@@ -165,6 +160,76 @@ class TestRoute(repository: TenderSearchRepository) : VerticalLayout() {
                     sheet,
                 )
             }
+            if (select.value == "По тендеру") {
+                div.removeAll()
+
+                val sheet: Grid<Tender> = getBaseTable()
+
+                val tenderText = TextField()
+
+                tenderText.placeholder = "Тендер"
+
+                val button = Button("Найти", VaadinIcon.SEARCH.create()) {
+                    val tender = tenderText.value
+
+                    sheet.setItems {
+                        repository.findAllByTenderNameContainingIgnoreCase(
+                            tender,
+                            VaadinSpringDataHelpers.toSpringPageRequest(it)
+                        ).stream()
+                    }
+                }
+
+                button.addThemeVariants(
+                    ButtonVariant.LUMO_PRIMARY,
+                    ButtonVariant.LUMO_CONTRAST,
+                )
+
+                val hl = HorizontalLayout(
+                    tenderText,
+                    button,
+                )
+
+                div.add(
+                    hl,
+                    sheet,
+                )
+            }
+            if (select.value == "По покупателю") {
+                div.removeAll()
+
+                val sheet: Grid<Tender> = getBaseTable()
+
+                val customerText = TextField()
+
+                customerText.placeholder = "Покупатель"
+
+                val button = Button("Найти", VaadinIcon.SEARCH.create()) {
+                    val customer = customerText.value
+
+                    sheet.setItems {
+                        repository.findAllByCustomerContainsIgnoreCase(
+                            customer,
+                            VaadinSpringDataHelpers.toSpringPageRequest(it)
+                        ).stream()
+                    }
+                }
+
+                button.addThemeVariants(
+                    ButtonVariant.LUMO_PRIMARY,
+                    ButtonVariant.LUMO_CONTRAST,
+                )
+
+                val hl = HorizontalLayout(
+                    customerText,
+                    button,
+                )
+
+                div.add(
+                    hl,
+                    sheet,
+                )
+            }
         }
 
         val horizontalLayout = HorizontalLayout(
@@ -178,6 +243,7 @@ class TestRoute(repository: TenderSearchRepository) : VerticalLayout() {
     }
 
     private fun getBaseTable(): Grid<Tender> {
+
 
         val sheet: Grid<Tender> = Grid<Tender>().apply {
             addColumn(Tender::tenderName)

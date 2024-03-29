@@ -74,16 +74,14 @@ interface TenderSearchRepository : ElasticsearchRepository<Tender, String> {
         """
     )
     fun fullTextSearchOr(keywords: String, exclude: String): List<Tender>
+
+    fun findAllByCategoryIgnoreCase(category: String, pageable: Pageable): List<Tender>
+
     fun findAllByTenderId(tenderId: String, pageable: Pageable): Page<Tender>
 
     fun findAllByCustomerContainsIgnoreCase(customer: String, pageable: Pageable): Page<Tender>
 
     fun findAllByRegionContainsIgnoreCase(region: String, pageable: Pageable): Page<Tender>
-
-    fun findAllByRegion(region: String, pageable: Pageable): Page<Tender>
-    fun findAllByRegionIgnoreCase(region: String, pageable: Pageable): Page<Tender>
-
-    fun findAllByCategoryIgnoreCase(category: String, pageable: Pageable): Page<Tender>
 
     fun findAllByCategory(category: String, pageable: Pageable): Page<Tender>
 
