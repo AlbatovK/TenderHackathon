@@ -56,7 +56,6 @@ repositories {
 
 vaadin.productionMode = System.getenv("PROD_MODE")?.toBoolean() ?: false
 
-
 vaadin {
     forceProductionBuild = System.getenv("PROD_MODE")?.toBoolean() ?: false
     productionMode = System.getenv("PROD_MODE")?.toBoolean() ?: false
